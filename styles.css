@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+body {
+  max-width: 120rem;
+  font-size: 2.2rem;
+}
+
+.board {
+  height: 30rem;
+  width: 30rem;
+  margin: 0 auto;
+  border: 1px solid;
+  background-color: aliceblue;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-item: 1px solid;
+}
+
+.grid-item {
+  border: 1px solid;
+}
