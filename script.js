@@ -12,7 +12,16 @@
 // const grid8 = document.getElementById("8").getAttribute("id");
 // const grid9 = document.getElementById("9").getAttribute("id");
 
-const grid1 = document.
+const grid1 = document.querySelector(".item-1");
+const grid2 = document.querySelector(".item-2");
+const grid3 = document.querySelector(".item-3");
+const grid4 = document.querySelector(".item-4");
+const grid5 = document.querySelector(".item-5");
+const grid6 = document.querySelector(".item-6");
+const grid7 = document.querySelector(".item-7");
+const grid8 = document.querySelector(".item-8");
+const grid9 = document.querySelector(".item-9");
+const grid = document.querySelectorAll(".grid");
 
 // const gameBoard = {
 //   gameBoard: ["x", "o", "x", "o", "x", "o"],
@@ -34,7 +43,7 @@ const playerCreator = function (name, mark) {
 };
 
 const Gameboard = (function () {
-  const gameBoard = ["X", "O", "X", "O", "X", "O", "X", "O", "X"];
+  const gameBoard = ["", "", "", "", "", "", "", "", ""];
 
   const player1 = playerCreator("Gandalf", "X");
   const player2 = playerCreator("Sauron", "O");
@@ -55,11 +64,41 @@ const items = [
   [``, ``, ``],
 ];
 
+const items2 = [];
+
 // document.querySelector("div").textContent = `${gameBoard.board}`;
 
 const board = document.querySelector(".board");
 
-board.addEventListener("click", function (e) {});
+const loopGameBoard = function (e) {
+  for (const x of Gameboard.gameBoard) {
+    e.target.textContent = x;
+  }
+};
+
+const draw = function () {
+  let n = 0;
+  Gameboard.gameBoard.forEach(() => {
+    document.getElementById(`${n}`).textContent = Gameboard.gameBoard[n];
+    n++;
+  });
+};
+
+// function draw() {
+//   let n = 0;
+//   boardState.forEach(() => {
+//     document.getElementById(`game-cell-${n + 1}`).textContent = boardState[n];
+//     n++;
+//   });
+// }
+
+// board.addEventListener("click", function (e) {
+//   for (const mark of Gameboard.gameBoard) {
+//     console.log(mark);
+//     e.target.textContent = mark
+//   }
+//   items2[`${e.target.getAttribute("id")}`] = e.target.textContent;
+// });
 
 // board.addEventListener("click", function (e) {
 //   e.target.textContent = `${gameBoard.board[0]}`;
