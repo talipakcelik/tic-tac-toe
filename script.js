@@ -49,7 +49,7 @@ const Tttgame = (function () {
   };
 
   const gameFlow = function () {};
-  const draw = function () {
+  const refresh = function () {
     let n = 0;
     gameBoard.forEach(() => {
       document.getElementById(`${n}`).textContent = gameBoard[n];
@@ -68,6 +68,7 @@ const Tttgame = (function () {
         console.log("dede");
         storeBoard[index] = activePlayer.mark;
         e.target.textContent = activePlayer.mark;
+        console.log(storeBoard.length);
         checkWin();
         switchPlayer();
       }
@@ -81,16 +82,57 @@ const Tttgame = (function () {
       activePlayer.mark === storeBoard[2]
     ) {
       console.log(`${activePlayer.name} is won`);
-    }
+    } else if (
+      activePlayer.mark === storeBoard[3] &&
+      activePlayer.mark === storeBoard[4] &&
+      activePlayer.mark === storeBoard[5]
+    )
+      console.log(`${activePlayer.name} is won`);
+    else if (
+      activePlayer.mark === storeBoard[6] &&
+      activePlayer.mark === storeBoard[7] &&
+      activePlayer.mark === storeBoard[8]
+    )
+      console.log(`${activePlayer.name} is won`);
+    else if (
+      activePlayer.mark === storeBoard[2] &&
+      activePlayer.mark === storeBoard[4] &&
+      activePlayer.mark === storeBoard[6]
+    )
+      console.log(`${activePlayer.name} is won`);
+    else if (
+      activePlayer.mark === storeBoard[0] &&
+      activePlayer.mark === storeBoard[4] &&
+      activePlayer.mark === storeBoard[8]
+    )
+      console.log(`${activePlayer.name} is won`);
+    else if (
+      activePlayer.mark === storeBoard[0] &&
+      activePlayer.mark === storeBoard[3] &&
+      activePlayer.mark === storeBoard[6]
+    )
+      console.log(`${activePlayer.name} is won`);
+    else if (
+      activePlayer.mark === storeBoard[1] &&
+      activePlayer.mark === storeBoard[4] &&
+      activePlayer.mark === storeBoard[7]
+    )
+      console.log(`${activePlayer.name} is won`);
+    else if (
+      activePlayer.mark === storeBoard[2] &&
+      activePlayer.mark === storeBoard[5] &&
+      activePlayer.mark === storeBoard[8]
+    )
+      console.log(`${activePlayer.name} is won`);
+    else if ((storeBoard.length = 9)) console.log(`draw!`);
   };
 
   return {
-    storeBoard,
-    players,
-    switchPlayer,
-    activePlayer,
     displayController,
-    draw,
-    checkWin,
+    refresh,
   };
 })();
+
+function init() {
+  Tttgame.displayController();
+}
