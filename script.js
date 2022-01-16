@@ -60,6 +60,7 @@ const Tttgame = (function () {
   let storeBoard = [];
 
   const displayController = function () {
+    const board = document.querySelector(".board");
     board.addEventListener("click", function (e) {
       const index = e.target.getAttribute("id");
       console.log(index);
@@ -67,9 +68,20 @@ const Tttgame = (function () {
         console.log("dede");
         storeBoard[index] = activePlayer.mark;
         e.target.textContent = activePlayer.mark;
+        checkWin();
         switchPlayer();
       }
     });
+  };
+
+  const checkWin = function () {
+    if (
+      activePlayer.mark === storeBoard[0] &&
+      activePlayer.mark === storeBoard[1] &&
+      activePlayer.mark === storeBoard[2]
+    ) {
+      console.log(`${activePlayer.name} is won`);
+    }
   };
 
   return {
@@ -79,5 +91,6 @@ const Tttgame = (function () {
     activePlayer,
     displayController,
     draw,
+    checkWin,
   };
 })();
