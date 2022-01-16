@@ -34,21 +34,78 @@ const player2 = {};
 
 const gameFlow = {};
 
-const playerCreator = function (name, mark) {
-  const player = {};
-  player.name = name;
-  player.mark = mark;
+// const playerCreator = function (mark, active = false) {
+//   const players = {};
+//   players.mark = mark;
+//   players.active = active;
+//   players.toggle = function () {
+//     if (this.active === true) {
+//       this.active = false;
+//     } else {
+//       this.active === true;
+//     }
+//   };
+//   return players;
+// };
 
-  return player;
+const playerCreator = function (name, mark, active) {
+  let state = {};
+  (state.name = name), (state.mark = mark), (state.active = active);
+
+  return {
+    get name() {
+      return state.name;
+    },
+    get mark() {
+      return state.mark;
+    },
+    get isActive() {
+      return state.active;
+    },
+    toggle() {
+      state.active = !state.active;
+    },
+  };
 };
 
-const Gameboard = (function () {
-  const gameBoard = ["", "", "", "", "", "", "", "", ""];
+const Tttgame = (function () {
+  const gameBoard = ["X", "0", "X", "0", "X", "0", "X", "0", "X"];
 
-  const player1 = playerCreator("Gandalf", "X");
-  const player2 = playerCreator("Sauron", "O");
+  let players = [
+    playerCreator("Gandalf", "X", true),
+    playerCreator("Sauron", "O", false),
+  ];
 
-  return { gameBoard, player1, player2 };
+  let activePlayer = players[0].name;
+
+  const switchPlayer = function () {
+    if (activePlayer === players[0].name) activePlayer = players[1].name;
+    else activePlayer = players[0].name;
+    console.log(activePlayer);
+  };
+
+  const displayController = function {
+    board.addEventListener("click", function() {
+      e.target.textContent = activePlayer.mark // burayı activePlayer.mark player yapabilmek için players[0]'dan sonra name kalktı. 
+    })
+  }
+
+  const draw = function () {
+    let n = 0;
+    Gameboard.gameBoard.forEach(() => {
+      document.getElementById(`${n}`).textContent = Gameboard.gameBoard[n];
+      n++;
+    });
+  };
+  // console.log(players[1]);
+  // const player1 = playerCreator("X", true);
+  // const player2 = playerCreator("O", false);
+
+  // function resetBoard() {
+  //   gameBoard.gameboard = ["", "", "", "", "", "", "", "", ""];
+  // }
+
+  return { players, switchPlayer, activePlayer };
 })();
 
 let activePlayer = "X";
@@ -63,8 +120,6 @@ const items = [
   [``, ``, ``],
   [``, ``, ``],
 ];
-
-const items2 = [];
 
 // document.querySelector("div").textContent = `${gameBoard.board}`;
 
@@ -91,12 +146,13 @@ const draw = function () {
 //     n++;
 //   });
 // }
+const items2 = [];
 
 // board.addEventListener("click", function (e) {
-//   for (const mark of Gameboard.gameBoard) {
-//     console.log(mark);
-//     e.target.textContent = mark
+//   if (e.target.textContent !== "X" && e.target.textContent !== "O") {
+//     e.target.textContent = Gameboard.gameBoard[0];
 //   }
+
 //   items2[`${e.target.getAttribute("id")}`] = e.target.textContent;
 // });
 
