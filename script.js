@@ -63,73 +63,111 @@ const Tttgame = (function () {
     const board = document.querySelector(".board");
     board.addEventListener("click", function (e) {
       const index = e.target.getAttribute("id");
-      console.log(index);
       if (e.target.textContent !== "X" && e.target.textContent !== "O") {
-        console.log("dede");
         storeBoard[index] = activePlayer.mark;
         e.target.textContent = activePlayer.mark;
         console.log(storeBoard.length);
-        checkWin();
+        checkWin3();
         switchPlayer();
       }
     });
   };
 
-  const checkWin = function () {
-    if (
-      activePlayer.mark === storeBoard[0] &&
-      activePlayer.mark === storeBoard[1] &&
-      activePlayer.mark === storeBoard[2]
-    ) {
-      console.log(`${activePlayer.name} is won`);
-    } else if (
-      activePlayer.mark === storeBoard[3] &&
-      activePlayer.mark === storeBoard[4] &&
-      activePlayer.mark === storeBoard[5]
-    )
-      console.log(`${activePlayer.name} is won`);
-    else if (
-      activePlayer.mark === storeBoard[6] &&
-      activePlayer.mark === storeBoard[7] &&
-      activePlayer.mark === storeBoard[8]
-    )
-      console.log(`${activePlayer.name} is won`);
-    else if (
-      activePlayer.mark === storeBoard[2] &&
-      activePlayer.mark === storeBoard[4] &&
-      activePlayer.mark === storeBoard[6]
-    )
-      console.log(`${activePlayer.name} is won`);
-    else if (
-      activePlayer.mark === storeBoard[0] &&
-      activePlayer.mark === storeBoard[4] &&
-      activePlayer.mark === storeBoard[8]
-    )
-      console.log(`${activePlayer.name} is won`);
-    else if (
-      activePlayer.mark === storeBoard[0] &&
-      activePlayer.mark === storeBoard[3] &&
-      activePlayer.mark === storeBoard[6]
-    )
-      console.log(`${activePlayer.name} is won`);
-    else if (
-      activePlayer.mark === storeBoard[1] &&
-      activePlayer.mark === storeBoard[4] &&
-      activePlayer.mark === storeBoard[7]
-    )
-      console.log(`${activePlayer.name} is won`);
-    else if (
-      activePlayer.mark === storeBoard[2] &&
-      activePlayer.mark === storeBoard[5] &&
-      activePlayer.mark === storeBoard[8]
-    )
-      console.log(`${activePlayer.name} is won`);
-    else if ((storeBoard.length = 9)) console.log(`draw!`);
+  // let storeBoard2 = ["X", "O", "X"];
+
+  const checkWin2 = function (indexes, mark) {
+    // let i = 0;
+    storeBoard.forEach(() => {
+      if (
+        storeBoard[indexes[0]] === mark &&
+        storeBoard[indexes[1]] === mark &&
+        storeBoard[indexes[2]] === mark
+      )
+        console.log(`${activePlayer.name} won`);
+      // i++;
+    });
   };
+
+  const checkWin3 = function () {
+    checkWin2([0, 1, 2], activePlayer.mark);
+    checkWin2([3, 4, 5], activePlayer.mark);
+    checkWin2([6, 7, 8], activePlayer.mark);
+    checkWin2([2, 4, 6], activePlayer.mark);
+    checkWin2([0, 4, 8], activePlayer.mark);
+    checkWin2([0, 3, 6], activePlayer.mark);
+    checkWin2([1, 4, 7], activePlayer.mark);
+    checkWin2([2, 5, 8], activePlayer.mark);
+  };
+
+  // const checkWin = function () {
+  //   let isThereWin;
+  //   if (
+  //     activePlayer.mark === storeBoard[0] &&
+  //     activePlayer.mark === storeBoard[1] &&
+  //     activePlayer.mark === storeBoard[2]
+  //   )
+  //     console.log(`${activePlayer.name} is won`);
+  //   else if (
+  //     activePlayer.mark === storeBoard[3] &&
+  //     activePlayer.mark === storeBoard[4] &&
+  //     activePlayer.mark === storeBoard[5]
+  //   )
+  //     console.log(`${activePlayer.name} is won`);
+  //   else if (
+  //     activePlayer.mark === storeBoard[6] &&
+  //     activePlayer.mark === storeBoard[7] &&
+  //     activePlayer.mark === storeBoard[8]
+  //   )
+  //     console.log(`${activePlayer.name} is won`);
+  //   else if (
+  //     activePlayer.mark === storeBoard[2] &&
+  //     activePlayer.mark === storeBoard[4] &&
+  //     activePlayer.mark === storeBoard[6]
+  //   )
+  //     console.log(`${activePlayer.name} is won`);
+  //   else if (
+  //     activePlayer.mark === storeBoard[0] &&
+  //     activePlayer.mark === storeBoard[4] &&
+  //     activePlayer.mark === storeBoard[8]
+  //   )
+  //     console.log(`${activePlayer.name} is won`);
+  //   else if (
+  //     activePlayer.mark === storeBoard[0] &&
+  //     activePlayer.mark === storeBoard[3] &&
+  //     activePlayer.mark === storeBoard[6]
+  //   )
+  //     console.log(`${activePlayer.name} is won`);
+  //   else if (
+  //     activePlayer.mark === storeBoard[1] &&
+  //     activePlayer.mark === storeBoard[4] &&
+  //     activePlayer.mark === storeBoard[7]
+  //   )
+  //     console.log(`${activePlayer.name} is won`);
+  //   else if (
+  //     activePlayer.mark === storeBoard[2] &&
+  //     activePlayer.mark === storeBoard[5] &&
+  //     activePlayer.mark === storeBoard[8]
+  //   )
+  //     console.log(`${activePlayer.name} is won`);
+  //   else if (
+  //     (storeBoard[0] === "X" || storeBoard === "O") &&
+  //     (storeBoard[1] === "X" || storeBoard === "O") &&
+  //     (storeBoard[2] === "X" || storeBoard === "O") &&
+  //     (storeBoard[3] === "X" || storeBoard === "O") &&
+  //     (storeBoard[4] === "X" || storeBoard === "O") &&
+  //     (storeBoard[5] === "X" || storeBoard === "O") &&
+  //     (storeBoard[6] === "X" || storeBoard === "O") &&
+  //     (storeBoard[7] === "X" || storeBoard === "O") &&
+  //     (storeBoard[8] === "X" || storeBoard === "O")
+  //   )
+  //     console.log(`draw!`);
+  // };
 
   return {
     displayController,
     refresh,
+    storeBoard,
+    checkWin2,
   };
 })();
 
