@@ -45,7 +45,6 @@ const Tttgame = (function () {
   const switchPlayer = function () {
     if (activePlayer === players[0]) activePlayer = players[1];
     else activePlayer = players[0];
-    console.log(activePlayer);
   };
 
   const gameFlow = function () {};
@@ -57,7 +56,7 @@ const Tttgame = (function () {
     });
   };
 
-  let storeBoard = [];
+  let storeBoard = [null, null, null, null, null, null, null, null, null];
 
   const displayController = function () {
     const board = document.querySelector(".board");
@@ -66,27 +65,40 @@ const Tttgame = (function () {
       if (e.target.textContent !== "X" && e.target.textContent !== "O") {
         storeBoard[index] = activePlayer.mark;
         e.target.textContent = activePlayer.mark;
-        console.log(storeBoard.length);
         checkWin3();
         switchPlayer();
       }
     });
   };
 
-  // let storeBoard2 = ["X", "O", "X"];
+  let storeBoard2 = ["X", "O", "X"];
 
   const checkWin2 = function (indexes, mark) {
-    // let i = 0;
-    storeBoard.forEach(() => {
-      if (
-        storeBoard[indexes[0]] === mark &&
-        storeBoard[indexes[1]] === mark &&
-        storeBoard[indexes[2]] === mark
-      )
-        console.log(`${activePlayer.name} won`);
-      // i++;
-    });
+    // let result = false;
+    let checkStoreBoard = [
+      storeBoard[indexes[0]],
+      storeBoard[indexes[1]],
+      storeBoard[indexes[2]],
+    ];
+    let result = checkStoreBoard.every((index) => index === mark);
+    if (result === true) {
+      console.log(`${activePlayer.name} is won`);
+    }
+    console.log(result, checkStoreBoard, mark);
   };
+
+  // const checkWin2 = function (indexes, mark) {
+  //   // let i = 0;
+  //   storeBoard.forEach(() => {
+  //     if (
+  //       storeBoard[indexes[0]] === mark &&
+  //       storeBoard[indexes[1]] === mark &&
+  //       storeBoard[indexes[2]] === mark
+  //     )
+  //       console.log(`${activePlayer.name} won`);
+  //     // i++;
+  //   });
+  // };
 
   const checkWin3 = function () {
     checkWin2([0, 1, 2], activePlayer.mark);
@@ -167,6 +179,7 @@ const Tttgame = (function () {
     displayController,
     refresh,
     storeBoard,
+    storeBoard2,
     checkWin2,
   };
 })();
