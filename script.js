@@ -54,6 +54,7 @@ const Tttgame = (function () {
       storeBoard[n] = gameBoard[n];
       n++;
     });
+    activePlayer = players[0];
     startGame();
   };
 
@@ -66,6 +67,7 @@ const Tttgame = (function () {
     if (e.target.textContent !== "X" && e.target.textContent !== "O") {
       storeBoard[index] = activePlayer.mark;
       e.target.textContent = activePlayer.mark;
+      checkDraw();
       checkWin3();
       switchPlayer();
     }
@@ -80,11 +82,18 @@ const Tttgame = (function () {
       storeBoard[indexes[1]],
       storeBoard[indexes[2]],
     ];
+
     let result = checkStoreBoard.every((index) => index === mark);
+    let draw = storeBoard.every((index) => index === "X" || index === "O");
     if (result === true) {
       console.log(`${activePlayer.name} is won`);
       board.removeEventListener("click", displayController);
-    }
+    } else if (draw === true) console.log("draw");
+  };
+
+  const checkDraw = function () {
+    let draw = storeBoard.every((index) => index === "X" || index === "O");
+    if (draw === true && checkWin2 === false) console.log("draw");
   };
 
   const checkWin3 = function () {
