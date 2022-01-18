@@ -76,7 +76,7 @@ const Tttgame = (function () {
     board.addEventListener("click", displayController);
   };
 
-  const checkWin2 = function (indexes, mark, e) {
+  const checkWin2 = function (indexes, mark) {
     let checkStoreBoard = [
       storeBoard[indexes[0]],
       storeBoard[indexes[1]],
