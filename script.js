@@ -19,6 +19,9 @@ const Tttgame = (function () {
   const startButton = document.querySelector(".start");
   const playerInput1 = document.querySelector("#player-1");
   const playerInput2 = document.querySelector("#player-2");
+  const overlay = document.getElementById("overlay");
+  const modal = document.querySelector(".modal");
+
   ///
 
   const gameBoard = ["", "", "", "", "", "", "", "", ""];
@@ -40,9 +43,9 @@ const Tttgame = (function () {
     let n = 0;
     gameBoard.forEach(() => {
       document.getElementById(`${n}`).textContent = gameBoard[n];
-      storeBoard[n] = gameBoard[n];
       n++;
     });
+    storeBoard.fill(null);
     activePlayer = players[0];
     startGame();
   };
@@ -59,12 +62,36 @@ const Tttgame = (function () {
       e.target.textContent = activePlayer.mark;
       if (checkWin(activePlayer.mark) !== false) {
         console.log(`${activePlayer.name} is won`);
+        openModal(modal);
+        document.querySelector(
+          ".modal-header"
+        ).textContent = `${activePlayer.name}`;
         board.removeEventListener("click", displayController);
       }
+      if (e.target.textContent === "X") {
+        e.target.style.color = "blue";
+      } else if (e.target.textContent === "O") e.target.style.color = "red";
+
       checkDraw();
       switchPlayer();
     }
   };
+
+  function openModal(modal) {
+    modal.classList.add("active");
+    overlay.classList.add("active");
+  }
+  function closaModal(modal) {
+    modal.classList.remove("active");
+    overlay.classList.remove("active");
+  }
+
+  overlay.addEventListener("click", function () {
+    const modals = document.querySelectorAll(".modal.active");
+    modals.forEach((modal) => {
+      closaModal(modal);
+    });
+  });
 
   /// start game
   const startGame = function () {
@@ -83,7 +110,8 @@ const Tttgame = (function () {
   const checkDraw = function () {
     let draw = storeBoard.every((index) => index === "X" || index === "O");
     if (draw === true && checkWin(activePlayer.mark) === false)
-      console.log("draw");
+      openModal(modal);
+    document.querySelector(".modal-header").textContent = `It's a draw`;
   };
 
   const winConditions = [
