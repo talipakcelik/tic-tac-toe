@@ -4,15 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Tic Tac Toe</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
+    <header>Tic-Tac-Toe</header>
     <section>
-      <div class="div"></div>
-    </section>
-    <section>
+      <div class="inputs">
+        <input
+          type="text"
+          name=""
+          id="player-1"
+          value=""
+          placeholder="Gandalf"
+          style="font-family: inherit"
+        />
+        <input
+          type="text"
+          name=""
+          id="player-2"
+          value=""
+          placeholder="Sauron"
+          style="font-family: inherit"
+        />
+      </div>
       <div class="board">
         <div class="grid item-1" id="0"></div>
         <div class="grid item-2" id="1"></div>
@@ -24,6 +44,15 @@
         <div class="grid item-8" id="7"></div>
         <div class="grid item-9" id="8"></div>
       </div>
+      <div class="game">
+        <button class="start" style="font-family: inherit">START</button>
+        <button class="restart" style="font-family: inherit">RESTART</button>
+      </div>
     </section>
+    <div class="modal-container" id="modal_container">
+      <div class="modal">
+        <h1>sauron kazandı12312312</h1>
+      </div>
+    </div>
   </body>
 </html>
