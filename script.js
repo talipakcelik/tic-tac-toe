@@ -1,26 +1,26 @@
 "use strict";
 
 const playerCreator = function (name, mark, active) {
-  let state = {};
-  (state.name = name), (state.mark = mark), (state.active = active);
-
-  return {
-    get name() {
-      return state.name;
-    },
-    get mark() {
-      return state.mark;
-    },
-    get isActive() {
-      return state.active;
-    },
-    toggle() {
-      state.active = !state.active;
-    },
+  const players = {};
+  players.name = name;
+  players.mark = mark;
+  players.isActive = active;
+  players.toggle = function () {
+    players.isActive = !players.isActive;
   };
+
+  return players;
 };
 
 const Tttgame = (function () {
+  /// DOM Selector
+  const board = document.querySelector(".board");
+  const restartButton = document.querySelector(".restart");
+  const startButton = document.querySelector(".start");
+  const playerInput1 = document.querySelector("#player-1");
+  const playerInput2 = document.querySelector("#player-2");
+  ///
+
   const gameBoard = ["", "", "", "", "", "", "", "", ""];
 
   let players = [
@@ -35,7 +35,8 @@ const Tttgame = (function () {
     else activePlayer = players[0];
   };
 
-  const refresh = function () {
+  /// restart
+  const restart = function () {
     let n = 0;
     gameBoard.forEach(() => {
       document.getElementById(`${n}`).textContent = gameBoard[n];
@@ -46,27 +47,38 @@ const Tttgame = (function () {
     startGame();
   };
 
-  let storeBoard = [null, null, null, null, null, null, null, null, null];
+  restartButton.addEventListener("click", restart);
+  ///
 
-  const board = document.querySelector(".board");
+  let storeBoard = [null, null, null, null, null, null, null, null, null];
 
   const displayController = function (e) {
     const index = e.target.getAttribute("id");
     if (e.target.textContent !== "X" && e.target.textContent !== "O") {
       storeBoard[index] = activePlayer.mark;
       e.target.textContent = activePlayer.mark;
-      checkDraw();
       if (checkWin(activePlayer.mark) !== false) {
         console.log(`${activePlayer.name} is won`);
         board.removeEventListener("click", displayController);
       }
+      checkDraw();
       switchPlayer();
     }
   };
 
+  /// start game
   const startGame = function () {
     board.addEventListener("click", displayController);
+    players[0].name = playerInput1.value;
+    players[1].name = playerInput2.value;
+    if (players[0].name === "" && players[1].name === "") {
+      players[0].name = "Gandalf";
+      players[1].name = "Sauron";
+    }
   };
+
+  startButton.addEventListener("click", startGame);
+  ///
 
   const checkDraw = function () {
     let draw = storeBoard.every((index) => index === "X" || index === "O");
@@ -93,12 +105,5 @@ const Tttgame = (function () {
     );
   };
 
-  return {
-    refresh,
-    startGame,
-  };
+  return {};
 })();
-
-function init() {
-  Tttgame.startGame();
-}
