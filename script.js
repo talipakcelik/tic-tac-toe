@@ -1,9 +1,10 @@
 "use strict";
 
-const playerCreator = function (name, mark, active) {
+const playerCreator = function (name, mark, score, active) {
   const players = {};
   players.name = name;
   players.mark = mark;
+  players.score = score;
   players.isActive = active;
   players.toggle = function () {
     players.isActive = !players.isActive;
@@ -21,6 +22,9 @@ const Tttgame = (function () {
   const playerInput2 = document.querySelector("#player-2");
   const overlay = document.getElementById("overlay");
   const modal = document.querySelector(".modal");
+  const modalHeader = document.querySelector(".modal-header");
+  const score1 = document.querySelector(".score-1");
+  const score2 = document.querySelector(".score-2");
 
   ///
 
@@ -30,11 +34,13 @@ const Tttgame = (function () {
     playerCreator(
       "Player 1",
       '<ion-icon name="close-outline" class="icon-1"></ion-icon>',
+      0,
       true
     ),
     playerCreator(
       "Player 2",
       '<ion-icon name="ellipse-outline" class="icon-2"></ion-icon>',
+      0,
       false
     ),
   ];
@@ -60,20 +66,26 @@ const Tttgame = (function () {
 
   restartButton.addEventListener("click", restart);
   ///
+  let score = [0, 0];
 
   let storeBoard = [null, null, null, null, null, null, null, null, null];
 
   const displayController = function (e) {
     const index = e.target.getAttribute("id");
-    if (e.target.textContent !== "X" && e.target.textContent !== "O") {
+    if (
+      e.target.textContent !==
+        '<ion-icon name="close-outline" class="icon-1"></ion-icon>' &&
+      e.target.textContent !==
+        '<ion-icon name="ellipse-outline" class="icon-2"></ion-icon>'
+    ) {
       storeBoard[index] = activePlayer.mark;
       e.target.innerHTML = activePlayer.mark;
       if (checkWin(activePlayer.mark) !== false) {
-        console.log(`${activePlayer.name} is won`);
         openModal(modal);
-        document.querySelector(
-          ".modal-header"
-        ).textContent = `${activePlayer.name}`;
+        modalHeader.textContent = `${activePlayer.name} has won this round!`;
+        activePlayer.score++;
+        score1.textContent = players[0].score;
+        score2.textContent = players[1].score;
         board.removeEventListener("click", displayController);
       }
       if (e.target.textContent === "X") {
@@ -123,8 +135,7 @@ const Tttgame = (function () {
     );
     if (draw === true && checkWin(activePlayer.mark) === false) {
       openModal(modal);
-      console.log("asdasd");
-      document.querySelector(".modal-header").textContent = `It's a draw`;
+      document.querySelector(".modal-header").textContent = `It's a draw!`;
     }
   };
 
