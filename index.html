@@ -14,22 +14,14 @@
   </head>
   <body>
     <header>Tic-Tac-Toe</header>
-    <section>
-      <div class="inputs">
+    <section class="section">
+      <div class="input-1">
         <input
           type="text"
           name=""
           id="player-1"
           value=""
-          placeholder="Gandalf"
-          style="font-family: inherit"
-        />
-        <input
-          type="text"
-          name=""
-          id="player-2"
-          value=""
-          placeholder="Sauron"
+          placeholder="Player 1"
           style="font-family: inherit"
         />
       </div>
@@ -44,15 +36,32 @@
         <div class="grid item-8" id="7"></div>
         <div class="grid item-9" id="8"></div>
       </div>
-      <div class="game">
-        <button class="start" style="font-family: inherit">START</button>
-        <button class="restart" style="font-family: inherit">RESTART</button>
+      <div class="input-2">
+        <input
+          type="text"
+          name=""
+          id="player-2"
+          value=""
+          placeholder="Player 2"
+          style="font-family: inherit"
+        />
       </div>
     </section>
-    <div class="modal-container" id="modal_container">
-      <div class="modal">
-        <h1>sauron kazandı12312312</h1>
-      </div>
+    <div class="game">
+      <button class="start" style="font-family: inherit">START</button>
+      <button class="restart" style="font-family: inherit">RESTART</button>
     </div>
+    <div class="modal" id="modal">
+      <div class="modal-header"></div>
+    </div>
+    <div id="overlay"></div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>
