@@ -27,8 +27,16 @@ const Tttgame = (function () {
   const gameBoard = ["", "", "", "", "", "", "", "", ""];
 
   let players = [
-    playerCreator("Gandalf", "X", true),
-    playerCreator("Sauron", "O", false),
+    playerCreator(
+      "Player 1",
+      '<ion-icon name="close-outline" class="icon-1"></ion-icon>',
+      true
+    ),
+    playerCreator(
+      "Player 2",
+      '<ion-icon name="ellipse-outline" class="icon-2"></ion-icon>',
+      false
+    ),
   ];
 
   let activePlayer = players[0];
@@ -59,7 +67,7 @@ const Tttgame = (function () {
     const index = e.target.getAttribute("id");
     if (e.target.textContent !== "X" && e.target.textContent !== "O") {
       storeBoard[index] = activePlayer.mark;
-      e.target.textContent = activePlayer.mark;
+      e.target.innerHTML = activePlayer.mark;
       if (checkWin(activePlayer.mark) !== false) {
         console.log(`${activePlayer.name} is won`);
         openModal(modal);
@@ -99,8 +107,8 @@ const Tttgame = (function () {
     players[0].name = playerInput1.value;
     players[1].name = playerInput2.value;
     if (players[0].name === "" && players[1].name === "") {
-      players[0].name = "Gandalf";
-      players[1].name = "Sauron";
+      players[0].name = "Player 1";
+      players[1].name = "Player 2";
     }
   };
 
@@ -108,10 +116,16 @@ const Tttgame = (function () {
   ///
 
   const checkDraw = function () {
-    let draw = storeBoard.every((index) => index === "X" || index === "O");
-    if (draw === true && checkWin(activePlayer.mark) === false)
+    let draw = storeBoard.every(
+      (index) =>
+        index === '<ion-icon name="close-outline" class="icon-1"></ion-icon>' ||
+        index === '<ion-icon name="ellipse-outline" class="icon-2"></ion-icon>'
+    );
+    if (draw === true && checkWin(activePlayer.mark) === false) {
       openModal(modal);
-    document.querySelector(".modal-header").textContent = `It's a draw`;
+      console.log("asdasd");
+      document.querySelector(".modal-header").textContent = `It's a draw`;
+    }
   };
 
   const winConditions = [
@@ -133,5 +147,5 @@ const Tttgame = (function () {
     );
   };
 
-  return {};
+  return { storeBoard };
 })();
