@@ -1,4 +1,4 @@
-# Giriş
+## Giriş
 - Bu proje [TheOdinProject'in yönergeleriyle](https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/tic-tac-toe) tamamlanmıştır.
 - [Önizleme](https://talipakcelik.github.io/tic-tac-toe/)
 - Not: Aşağıdaki başlıklar projenin içeriği hakkında spoiler içermektedir. 
