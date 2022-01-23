@@ -1,4 +1,4 @@
-# Introduction
+## Introduction
 - This project is completed with [TheOdinProject's instructions](https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/tic-tac-toe). 
 - [Live Preview](https://talipakcelik.github.io/tic-tac-toe/)
 - Read this and detailed walkthrough summary in [Turkish](https://github.com/talipakcelik/tic-tac-toe/blob/main/README.tr.md).
